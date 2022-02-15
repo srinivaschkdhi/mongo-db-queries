@@ -16,6 +16,8 @@ db.scrapeReoncileStatus.find({$where: "isInRange(this.scrapeTime,'2022-01-31', '
 
 db.scrapeReoncileStatus.find({$where: "isInRange(this.scrapeTime,'2022-01-31', '2022-02-01') == true"});
 
+db.scrapeReconcileStatus.find({"scrapeTime":{$type:"date"},$where: "isInRange(this.scrapeTime,'2022-01-30', '2022-02-03') == true"});
+
 
 
 db.scrapeReoncileStatus.find({refNum:'WORKUS'})
