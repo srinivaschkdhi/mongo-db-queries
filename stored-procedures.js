@@ -42,3 +42,37 @@ db.scrapeReconcileStatus.find({refNum:'WORKUS',scrapeTime:{$type:"date"}}).limit
    })
 
 db.statusTrack.find({startDate: { $gt: ISODate("2022-02-15T15:45:00.000+05:30") } })
+
+
+db.scrapeReconcileStatus.aggregate(
+    [
+        {
+            $match:{
+            "scrapeTime":{$type:"date"}
+            },
+        },    
+         { 
+             $project: 
+             { 
+                "startDate" :
+                    {
+                        $toDate:"2022-02-10" 
+                    },
+                    "start":"2022-02-10",
+                    "subSystemsAckStatusMap":1,
+                    "refNum":1,
+                    "correlationId":1,
+                    "scrapeTime":1,
+                    "event.payload.product":1,
+                    "event.payload.version":1
+            },
+        },
+        
+        {
+            $match:{
+               "scrapeTime": { 
+                   '$lt':ISODate("2022-02-10")
+                }
+            }
+        }
+    ])
