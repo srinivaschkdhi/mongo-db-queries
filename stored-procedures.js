@@ -40,3 +40,5 @@ db.scrapeReconcileStatus.find({refNum:'WORKUS',scrapeTime:{$type:"date"}}).limit
        
        print(b);
    })
+
+db.statusTrack.find({startDate: { $gt: ISODate("2022-02-15T15:45:00.000+05:30") } })
